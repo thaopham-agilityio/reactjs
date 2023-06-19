@@ -12,7 +12,10 @@ import { BOOKS_MESSAGES } from '@constants/error-messages';
 import { useDebounce } from '@hooks/use-debounce';
 import { TIME_OUT } from '@constants/time-out';
 import { Modal } from '@components/Modal';
-import { getAPI } from '@services/api-request';
+import axios from 'axios';
+import endpoint from '@helpers/endpoints-config';
+
+
 
 const Home = () => {
   const [listBooks, setListBooks] = useState<IBook[]>([]);
@@ -43,9 +46,15 @@ const Home = () => {
    */
   useEffect(() => {
     const fetchData = async () => {
-      const data = await getAPI();
-      setListBooks(data);
-      setListBooksFilter(data);
+      try {
+        const { data } = await axios.get<IBook[]>(
+          `${process.env.API_ENDPOINT}/${endpoint.BooksBaseUrl}`
+        );
+        setListBooks(data);
+        setListBooksFilter(data);
+      } catch (error) {
+        console.error('Error fetching data:', error);
+      }
     };
 
     fetchData();
