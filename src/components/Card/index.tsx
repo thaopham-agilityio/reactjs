@@ -7,7 +7,7 @@ interface CardProps {
   width: string;
   height: string;
 
-  book: IBook;
+  book: Partial<IBook>;
   onClick?: () => void;
 }
 

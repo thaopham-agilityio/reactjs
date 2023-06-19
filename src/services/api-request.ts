@@ -10,7 +10,7 @@ import { IBook } from '@interface/book';
 
 export const getAPI = async () => {
   const url = `${process.env.API_ENDPOINT}/${endpoint.BooksBaseUrl}`;
-  const res = await axios.get<IBook[]>(url);
+  const res = await axios.get<IBook[] | undefined>(url);
 
   try {
     return res.data;

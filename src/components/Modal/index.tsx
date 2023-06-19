@@ -9,7 +9,7 @@ interface ModalProps {
   loading: 'lazy' | 'eager';
   width: string;
   height: string;
-  book: IBook;
+  book: Partial<IBook>;
 }
 /**
  * Primary UI component for user interaction
