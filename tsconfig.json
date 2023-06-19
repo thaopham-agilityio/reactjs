@@ -32,7 +32,7 @@
       "@services*": ["src/services*"],
       "@hooks*": ["src/hooks*"],
       "@fonts*": ["src/assets/fonts*"],
-      "@image*": ["src/assets/images*"],
+      "@image*": ["public/images*"],
       "@stylesheets*": ["src/assets/stylesheets*"]
     }
   },
