@@ -4,7 +4,7 @@
     {
       "use": "@vercel/vite",
       "config": {
-        "includeFiles": ["db.json"]
+        "includeFiles": ["./src/json-server/db.json"]
       }
     }
   ],
