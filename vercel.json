@@ -2,7 +2,7 @@
   "version": 2,
   "builds": [
     {
-      "use": "@vercel/vite",
+      "use": "@vercel/node",
       "config": {
         "includeFiles": ["./src/json-server/db.json"]
       }
