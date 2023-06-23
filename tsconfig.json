@@ -32,10 +32,10 @@
       "@services*": ["src/services*"],
       "@hooks*": ["src/hooks*"],
       "@fonts*": ["src/assets/fonts*"],
-      "@image*": ["public/images*"],
+      "@image*": ["src/assets/images*"],
       "@stylesheets*": ["src/assets/stylesheets*"]
     }
   },
-  "include": ["**/*.ts", "**/*.tsx"],
+  "include": ["**/*.ts", "**/*.tsx", "server.cjs", "server.cjs"],
   "references": [{ "path": "./tsconfig.node.json" }]
 }

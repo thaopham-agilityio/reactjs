@@ -11,7 +11,8 @@ module.exports = {
   },
   plugins: ['react-refresh'],
   rules: {
-    'react-refresh/only-export-components': 'warn'
+    'react-refresh/only-export-components': 'warn',
+    "@typescript-eslint/no-var-requires": "error"
   },
   ignorePatterns: ["**/*.css", "**/*.scss"],
 };
