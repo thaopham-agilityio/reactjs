@@ -11,7 +11,7 @@
     "preview": "vite preview",
     "storybook": "storybook dev -p 6006",
     "build-storybook": "storybook build",
-    "prepare": "install husky"
+    "prepare": "cd ../.. && husky install practices/practice-one/.husky"
   },
   "dependencies": {
     "@storybook/addon-styling": "^1.0.8",
