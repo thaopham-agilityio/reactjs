@@ -21,7 +21,7 @@
     "noFallthroughCasesInSwitch": true,
 
     /* Path */
-    "baseUrl": "./",
+    "baseUrl": ".",
     "paths": {
       "@components*": ["src/components*"],
       "@pages*": ["src/pages*"],
@@ -36,6 +36,6 @@
       "@stylesheets*": ["src/assets/stylesheets*"]
     }
   },
-  "include": ["**/*.ts", "**/*.tsx", "server.cjs", "server.cjs"],
+  "include": ["**/*.ts", "**/*.tsx"],
   "references": [{ "path": "./tsconfig.node.json" }]
 }
