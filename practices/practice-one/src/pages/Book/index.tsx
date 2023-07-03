@@ -2,16 +2,16 @@ import Header from '@components/sessions/Header';
 import { ChangeEvent, useCallback, useEffect, useState } from 'react';
 import { IBook } from '@interface/book';
 import { ICategory } from '@interface/category';
-import { filterListByCategories } from '@helpers/category';
+import { filterListByCategories, categoriesMap } from '@helpers/category';
 import { Search } from '@helpers/book';
 import { Button } from '@components/common/Button';
 import { sortedBookList } from '@helpers/book';
 import { useDebounce } from '@hooks/use-debounce';
 import { TIME_OUT } from '@constants/time-out';
-import { Modal } from '@components/common/Modal';
+import { Modal } from '@components/sessions/Modal';
 import { getListBook, getCategories } from '@services/api-request';
-import ListCategory from '@components/sessions/Category/list-category';
-import ListBook from '@components/sessions/Book/list-book';
+import ListCategory from '@components/sessions/Category';
+import ListBook from '@components/sessions/Book';
 import BreadCrumb from '@components/sessions/BreadCrumb';
 import FilterDisplay from '@components/sessions/FilterDisplay';
 import FilterSort from '@components/sessions/FilterSort';
@@ -27,16 +27,7 @@ const Book = () => {
   const [sortOption, setSortOption] = useState({ title: true, published: false });
   const [valueSearch, setValueSearch] = useState<string>('');
   const [isOpenModal, setIsOpenModal] = useState<boolean>(false);
-  const [bookSelected, setBookSelected] = useState<IBook>({
-    id: '',
-    title: '',
-    categoryName: '',
-    description: '',
-    image: '',
-    author: '',
-    published: '',
-    publishers: '',
-  });
+  const [bookSelected, setBookSelected] = useState<IBook>({} as IBook);
   const [isChangeDarkTheme, setIsChangeDarkTheme] = useState<boolean>(true);
   const [isThemeModal, setIsThemeModal] = useState<boolean>(true);
 
@@ -83,6 +74,13 @@ const Book = () => {
   };
 
   /**
+   * Map over two arrays of objects
+   * @param {listCategories, listBooks} ICategory[], IBook[]
+   * @returns {List categories with total item of category} ICategory[]
+   */
+  const categoriesFormated = categoriesMap(listCategories, listBooks);
+
+  /**
    * Search product by keyword
    * @param {function} handleSearchChange
    * @returns {list items} list books with keyword search
@@ -90,13 +88,15 @@ const Book = () => {
   const handleSearchChange = (e: ChangeEvent<HTMLInputElement>) => {
     const { value } = e.target;
     setValueSearch(value);
+    setSelectedCategory('All Books');
   };
 
   const valueDebounced: string = useDebounce<string>(valueSearch.trim(), TIME_OUT.DEBOUNCE);
 
   useEffect(() => {
-    setListBooksFilter(Search(listBooks, valueSearch));
-  }, [valueDebounced]);
+    const search = Search(listBooks, valueDebounced);
+    setListBooksFilter(search);
+  }, [listBooks, valueDebounced]);
 
   /**
    * Handle toggle the modal theme
@@ -188,7 +188,7 @@ const Book = () => {
   };
 
   return (
-    <div className="container">
+    <div className={`${isChangeDarkTheme ? 'container' : 'container dark-theme'}`}>
       <Header
         isOpenSideBar={isOpenSideBar}
         toggleSideBar={toggleSideBar}
@@ -203,14 +203,17 @@ const Book = () => {
           <div className="book-category-title">Categories</div>
           <div className="book-category-list">A curated list of every book ever written</div>
           <ListCategory
-            categoryList={listCategories}
+            categoryList={categoriesFormated}
             categorySelected={selectedCategory}
             handleSelectCategory={handleFilterListByCategories}
           />
         </aside>
         <section className="column-content">
           <div className="book-toolbar-wrapper">
-            <BreadCrumb selectedCategory={selectedCategory} listBooksFilter={listBooksFilter} />
+            <BreadCrumb
+              selectedCategory={selectedCategory}
+              numberOfBook={listBooksFilter?.length}
+            />
             <div className={`filter ${isOpenFilter ? 'open' : ''}`}>
               <Button className="btn btn-filter" label="Filter" onClick={toggleFilter} />
               <div className="filter-box">
@@ -219,12 +222,7 @@ const Book = () => {
               </div>
             </div>
           </div>
-          <ListBook
-            isDarkTheme={isChangeDarkTheme}
-            listBook={listBooksFilter}
-            display={displayOption}
-            toggleModal={toggleModal}
-          />
+          <ListBook listBook={listBooksFilter} display={displayOption} toggleModal={toggleModal} />
           <Modal
             showModal={isOpenModal}
             closeModal={toggleModal}

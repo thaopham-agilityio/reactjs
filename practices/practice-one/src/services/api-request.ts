@@ -10,7 +10,7 @@ import { ICategory } from '@interface/category';
  */
 
 export const getListBook = async () => {
-  const url = `${process.env.API_ENDPOINT}/${endpoint.BooksBaseUrl}`;
+  const url = `${process.env.VITE_BASE_URL}/${endpoint.BooksBaseUrl}`;
   const res = await axios.get<IBook[]>(url);
 
   try {
@@ -21,7 +21,7 @@ export const getListBook = async () => {
 };
 
 export const getCategories = async () => {
-  const url = `${process.env.API_ENDPOINT}/${endpoint.CategoriesBaseUrl}`;
+  const url = `${process.env.VITE_BASE_URL}/${endpoint.CategoriesBaseUrl}`;
   const res = await axios.get<ICategory[]>(url);
 
   try {
