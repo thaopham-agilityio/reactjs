@@ -13,7 +13,13 @@ interface BookProps {
 const Book = ({ book, display, toggleModal }: BookProps) => {
   return (
     <li className={`book-item ${display.list ? 'list' : ''}`}>
-      <Card loading="lazy" width="200" height="200" book={book} onClick={() => toggleModal(book)} />
+      <Card
+        loading="eager"
+        width="200"
+        height="200"
+        book={book}
+        onClick={() => toggleModal(book)}
+      />
     </li>
   );
 };
