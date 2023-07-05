@@ -1,28 +1,22 @@
-import { BOOKS_MESSAGES } from '@constants/error-messages';
+import { Card } from '@components/common/Card';
 import { IBook } from '@interface/book';
-import Book from './book';
 
-interface ListBookProps {
-  listBook: IBook[] | undefined;
-  display: {
-    grid: boolean;
-    list: boolean;
-  };
+interface BookProps {
+  book: IBook;
+  displayOption: boolean;
   toggleModal: (book: IBook) => void;
 }
 
-const ListBook = ({ listBook, display, toggleModal }: ListBookProps) => {
+const BookItem = ({ book, displayOption, toggleModal }: BookProps) => {
+  const onToggleModal = () => {
+    toggleModal(book);
+  };
+
   return (
-    <div className="book-list-wrapper">
-      <ul className="book-list">
-        {!listBook?.length
-          ? BOOKS_MESSAGES.NO_DATA
-          : listBook?.map((book) => (
-              <Book key={book.id} book={book} display={display} toggleModal={toggleModal} />
-            ))}
-      </ul>
-    </div>
+    <li className={`book-item ${displayOption ? 'list' : ''}`}>
+      <Card loading="lazy" width="200" height="200" book={book} onClick={onToggleModal} />
+    </li>
   );
 };
 
-export default ListBook;
+export default BookItem;

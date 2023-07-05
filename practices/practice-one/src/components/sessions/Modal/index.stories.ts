@@ -16,12 +16,13 @@ type Story = StoryObj<typeof meta>;
 export const Default: Story = {
   args: {
     showModal: false,
-    closeModal: () => {('')},
-    toggleThemeModal: () => {('')},
+    closeModal: () => {
+      ('');
+    },
+    onToggleThemeModal: () => {
+      ('');
+    },
     isThemeModal: false,
-    loading: 'lazy',
-    width: '',
-    height: '',
     book: {
       title: 'Angels and demons',
       description:
@@ -31,5 +32,6 @@ export const Default: Story = {
       published: '2021',
       publishers: 'Hollman',
     },
+    children: 'Modal content here!',
   },
 };

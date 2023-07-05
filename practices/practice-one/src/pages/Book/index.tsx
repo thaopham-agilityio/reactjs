@@ -10,8 +10,8 @@ import { useDebounce } from '@hooks/use-debounce';
 import { TIME_OUT } from '@constants/time-out';
 import { Modal } from '@components/sessions/Modal';
 import { getListBook, getCategories } from '@services/api-request';
-import ListCategory from '@components/sessions/Category';
-import ListBook from '@components/sessions/Book';
+import ListCategory from '@components/sessions/ListCategories';
+import ListBook from '@components/sessions/ListBooks';
 import BreadCrumb from '@components/sessions/BreadCrumb';
 import FilterDisplay from '@components/sessions/FilterDisplay';
 import FilterSort from '@components/sessions/FilterSort';
@@ -24,7 +24,7 @@ const Book = () => {
   const [selectedCategory, setSelectedCategory] = useState<string>('');
   const [isOpenFilter, setIsOpenFilter] = useState<boolean>(false);
   const [isOpenSideBar, setIsOpenSideBar] = useState<boolean>(false);
-  const [displayOption, setDisplayOption] = useState({ grid: true, list: false });
+  const [isDisplayGrid, setIsDisplayGrid] = useState<boolean>(false);
   const [sortOption, setSortOption] = useState({ title: true, published: false });
   const [valueSearch, setValueSearch] = useState<string>('');
   const [isOpenModal, setIsOpenModal] = useState<boolean>(false);
@@ -159,12 +159,7 @@ const Book = () => {
    * @param {function} handleDisplay
    */
   const handleDisplay = (): void => {
-    setDisplayOption((prev) => {
-      return {
-        grid: !prev.grid,
-        list: !prev.list,
-      };
-    });
+    setIsDisplayGrid((prev) => !prev);
     setIsOpenFilter(false);
   };
 
@@ -188,42 +183,43 @@ const Book = () => {
     <div className={`${isChangeDarkTheme ? 'container' : 'container dark-theme'}`}>
       <Header
         isOpenSideBar={isOpenSideBar}
-        toggleSideBar={toggleSideBar}
+        onToggleSideBar={toggleSideBar}
         valueSearch={valueSearch}
-        handleSearchChange={handleSearchChange}
+        onSearchChange={handleSearchChange}
         isChangeDarkTheme={isChangeDarkTheme}
-        toggleThemePage={toggleThemePage}
+        onToggleThemePage={toggleThemePage}
       />
       <main className="main-site">
         <aside className="column-sidebar">
-          <Button className="btn btn-close-menu" label="" onClick={handleCloseSideBar} />
+          <Button className="btn btn-close-menu" onClick={handleCloseSideBar} />
           <div className="book-category-title">Categories</div>
           <div className="book-category-list">A curated list of every book ever written</div>
           <ListCategory
             categoryList={categoriesFormated}
             categorySelected={selectedCategory}
-            handleSelectCategory={handleFilterListByCategories}
+            onSelectCategory={handleFilterListByCategories}
           />
         </aside>
         <section className="column-content">
           <div className="book-toolbar-wrapper">
-            <BreadCrumb
-              selectedCategory={selectedCategory}
-              numberOfBook={listBooksFilter?.length}
-            />
+            <BreadCrumb selectedCategory={selectedCategory} total={listBooksFilter?.length} />
             <div className={`filter ${isOpenFilter ? 'open' : ''}`}>
               <Button className="btn btn-filter" label="Filter" onClick={toggleFilter} />
               <div className="filter-box">
-                <FilterDisplay displayOption={displayOption} handleDisplay={handleDisplay} />
-                <FilterSort handleSort={handleSort} sortOption={sortOption} />
+                <FilterDisplay onDisplay={handleDisplay} displayOption={isDisplayGrid} />
+                <FilterSort onSort={handleSort} sortOption={sortOption} />
               </div>
             </div>
           </div>
-          <ListBook listBook={listBooksFilter} display={displayOption} toggleModal={toggleModal} />
+          <ListBook
+            listBook={listBooksFilter}
+            displayOption={isDisplayGrid}
+            onToggleModal={toggleModal}
+          />
           <Modal
             showModal={isOpenModal}
             closeModal={toggleModal}
-            toggleThemeModal={toggleThemeModal}
+            onToggleThemeModal={toggleThemeModal}
             isThemeModal={isThemeModal}
             book={bookSelected}
           >
