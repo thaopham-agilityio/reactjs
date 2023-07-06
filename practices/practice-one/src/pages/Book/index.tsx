@@ -1,5 +1,5 @@
 import Header from '@components/sessions/Header';
-import { ChangeEvent, useCallback, useEffect, useState } from 'react';
+import { ChangeEvent, useCallback, useEffect, useState, Suspense, lazy } from 'react';
 import { IBook } from '@interface/book';
 import { ICategory } from '@interface/category';
 import { filterListByCategories, categoriesMap } from '@helpers/category';
@@ -8,7 +8,6 @@ import { Button } from '@components/common/Button';
 import { sortedBookList } from '@helpers/book';
 import { useDebounce } from '@hooks/use-debounce';
 import { TIME_OUT } from '@constants/time-out';
-import { Modal } from '@components/sessions/Modal';
 import { getListBook, getCategories } from '@services/api-request';
 import ListCategory from '@components/sessions/ListCategories';
 import ListBook from '@components/sessions/ListBooks';
@@ -179,6 +178,15 @@ const Book = () => {
     setIsOpenFilter(false);
   };
 
+  // Add a fixed delay so you can see the loading state
+  const delayForModal = (promise) => {
+    return new Promise((resolve) => {
+      setTimeout(resolve, 2000);
+    }).then(() => promise);
+  };
+
+  const Modal = lazy(() => delayForModal(import('@components/sessions/Modal')));
+
   return (
     <div className={`${isChangeDarkTheme ? 'container' : 'container dark-theme'}`}>
       <Header
@@ -216,15 +224,17 @@ const Book = () => {
             displayOption={isDisplayGrid}
             onToggleModal={toggleModal}
           />
-          <Modal
-            showModal={isOpenModal}
-            closeModal={toggleModal}
-            onToggleThemeModal={toggleThemeModal}
-            isThemeModal={isThemeModal}
-            book={bookSelected}
-          >
-            <DetailModal loading="eager" width="128" height="170" book={bookSelected} />
-          </Modal>
+          <Suspense>
+            <Modal
+              showModal={isOpenModal}
+              closeModal={toggleModal}
+              onToggleThemeModal={toggleThemeModal}
+              isThemeModal={isThemeModal}
+              book={bookSelected}
+            >
+              <DetailModal loading="lazy" width="128" height="170" book={bookSelected} />
+            </Modal>
+          </Suspense>
         </section>
       </main>
     </div>
