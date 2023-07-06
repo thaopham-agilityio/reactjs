@@ -223,7 +223,7 @@ const Book = () => {
             isThemeModal={isThemeModal}
             book={bookSelected}
           >
-            <DetailModal loading="lazy" width="128" height="170" book={bookSelected} />
+            <DetailModal loading="eager" width="128" height="170" book={bookSelected} />
           </Modal>
         </section>
       </main>
