@@ -39,7 +39,7 @@ const Home = () => {
    */
   const fetchBooks = async () => {
     loadingBooks(true);
-    const url = `${process.env.API_ENDPOINT}/${endpoint.BooksBaseUrl}`;
+    const url = `${process.env.VITE_BASE_URL}/${endpoint.BooksBaseUrl}`;
     const data = await getData(url);
     loadingBooks(false);
 
@@ -55,7 +55,7 @@ const Home = () => {
    * Get categories from API
    */
   const fetchCategory = async () => {
-    const url = `${process.env.API_ENDPOINT}/${endpoint.CategoriesBaseUrl}`;
+    const url = `${process.env.VITE_BASE_URL}/${endpoint.CategoriesBaseUrl}`;
     const data = await getData(url);
     setListCategories(data);
   };
