@@ -17,7 +17,7 @@ const Logo = ({ toggleSideBar }: LogoProps) => {
           altText="Book Shelter"
           height="44"
           imageSrc={logo}
-          loading="eager"
+          loading="lazy"
           width="54"
           text="BookShelter"
         />

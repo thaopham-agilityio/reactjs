@@ -29,6 +29,9 @@ const ListBook = ({ listBook, displayOption, onToggleModal }: ListBookProps) => 
           renderListBook()
         )}
       </ul>
+      <div className="loading-indicator">
+        <div className="loading"></div>
+      </div>
     </div>
   );
 };
