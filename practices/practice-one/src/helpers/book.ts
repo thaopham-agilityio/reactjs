@@ -1,5 +1,5 @@
-import { IBook } from '../interface/book';
-import { displayElement } from './loading';
+import { IBook } from '@interface/book';
+import { displayElement } from './display-element';
 
 interface sortOption {
   title: boolean;

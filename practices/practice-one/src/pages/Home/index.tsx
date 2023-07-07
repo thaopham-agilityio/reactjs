@@ -9,13 +9,14 @@ import { sortedBookList } from '@helpers/book';
 import { useDebounce } from '@hooks/use-debounce';
 import { TIME_OUT } from '@constants/time-out';
 import { Modal } from '@components/sessions/Modal';
-import { getListBook, getCategories } from '@services/api-request';
+import { getData } from '@services/api-request';
+import endpoint from '@helpers/endpoints-config';
 import ListCategory from '@components/sessions/ListCategories';
 import ListBook from '@components/sessions/ListBooks';
 import BreadCrumb from '@components/sessions/BreadCrumb';
 import FilterDisplay from '@components/sessions/FilterDisplay';
 import FilterSort from '@components/sessions/FilterSort';
-import { DetailModal } from '@components/sessions/Modal/DetailModal';
+import { BookDetail } from '@components/sessions/Modal/BookDetail';
 
 const Home = () => {
   const [listBooks, setListBooks] = useState<IBook[] | undefined>([]);
@@ -38,7 +39,8 @@ const Home = () => {
    */
   const fetchBooks = async () => {
     loadingBooks(true);
-    const data = await getListBook();
+    const url = `${process.env.API_ENDPOINT}/${endpoint.BooksBaseUrl}`;
+    const data = await getData(url);
     loadingBooks(false);
 
     setListBooks(data);
@@ -53,7 +55,8 @@ const Home = () => {
    * Get categories from API
    */
   const fetchCategory = async () => {
-    const data = await getCategories();
+    const url = `${process.env.API_ENDPOINT}/${endpoint.CategoriesBaseUrl}`;
+    const data = await getData(url);
     setListCategories(data);
   };
 
@@ -226,7 +229,7 @@ const Home = () => {
             isThemeModal={isThemeModal}
             title={bookSelected.title}
           >
-            <DetailModal loading="lazy" width="128" height="170" book={bookSelected} />
+            <BookDetail loading="lazy" width="128" height="170" book={bookSelected} />
           </Modal>
         </section>
       </main>
