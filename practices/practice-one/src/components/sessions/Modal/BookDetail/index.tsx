@@ -2,7 +2,6 @@ import { IBook } from '@interface/book';
 
 // Define the props for the Modal Detail component
 interface BookDetailProps {
-  loading: 'lazy' | 'eager';
   width: string;
   height: string;
   book: Partial<IBook>;
@@ -11,7 +10,6 @@ interface BookDetailProps {
  * Primary UI component for user interaction
  */
 export const BookDetail = ({
-  loading,
   width,
   height,
   book: { title, description, author, published, publishers, image },
@@ -21,14 +19,7 @@ export const BookDetail = ({
       <div className="modal-content">
         <figure className="modal-container-content">
           <div className="modal-container-img">
-            <img
-              className="img-item"
-              loading={loading}
-              src={image}
-              width={width}
-              height={height}
-              alt={title}
-            />
+            <img className="img-item" src={image} width={width} height={height} alt={title} />
           </div>
           <figcaption className="modal-container-text">
             <p className="modal-desc">{description}</p>
