@@ -13,14 +13,7 @@ const Logo = ({ onToggleCategoriesOnMobile }: LogoProps) => {
         <Button className="btn btn-hamburger" onClick={onToggleCategoriesOnMobile} />
       </span>
       <a className="header-logo" href="./" title="Book Shelter">
-        <Image
-          altText="Book Shelter"
-          height="44"
-          imageSrc={logo}
-          loading="lazy"
-          width="54"
-          text="BookShelter"
-        />
+        <Image altText="Book Shelter" height="44" imageSrc={logo} width="54" text="BookShelter" />
       </a>
     </section>
   );

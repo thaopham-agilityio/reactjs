@@ -14,7 +14,7 @@ const BookItem = ({ book, isDisplayBooks, toggleModal }: BookProps) => {
 
   return (
     <li className={`book-item ${isDisplayBooks ? 'list' : ''}`}>
-      <Card loading="lazy" width="200" height="200" book={book} onClick={onToggleModal} />
+      <Card width="200" height="200" book={book} onClick={onToggleModal} />
     </li>
   );
 };
