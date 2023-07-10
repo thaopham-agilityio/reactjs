@@ -1,5 +1,4 @@
 import { IBook } from '@interface/book';
-import { displayElement } from './display-element';
 
 interface sortOption {
   isSortByAlphabet: boolean;
