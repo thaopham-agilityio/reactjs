@@ -47,13 +47,3 @@ export const Search = (listBooks: IBook[] | undefined, valueSearch: string) => {
 
   return result;
 };
-
-/**
- * Show/hide loading when render list books
- * @param {boolean} status
- */
-
-export const loadingBooks = (status: boolean): void => {
-  const listBooksElement = <HTMLDivElement>document.querySelector('.book-list-wrapper');
-  displayElement(listBooksElement, status, 'loading');
-};
