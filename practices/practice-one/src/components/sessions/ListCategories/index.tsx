@@ -5,7 +5,7 @@ import { CATEGORY_MESSAGES } from '@constants/error-messages';
 interface ListCategoryProps {
   categoryList: ICategory[] | undefined;
   categorySelected: string;
-  onSelectCategory: (categoryName: string) => void;
+  onSelectCategory: (category: string) => void;
 }
 
 const ListCategory = ({ categoryList, categorySelected, onSelectCategory }: ListCategoryProps) => {
@@ -15,7 +15,7 @@ const ListCategory = ({ categoryList, categorySelected, onSelectCategory }: List
         key={category.id}
         category={category}
         categorySelected={categorySelected}
-        handleSelectCategory={onSelectCategory}
+        onSelectCategory={onSelectCategory}
       />
     ));
   };

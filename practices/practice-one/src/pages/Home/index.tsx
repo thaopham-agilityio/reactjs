@@ -9,8 +9,7 @@ import { sortedBookList } from '@helpers/book';
 import { useDebounce } from '@hooks/use-debounce';
 import { TIME_OUT } from '@constants/time-out';
 import { Modal } from '@components/sessions/Modal';
-import { getData } from '@services/api-request';
-import endpoint from '@helpers/endpoints-config';
+import { getCategories, getListBook } from '@services/api-request';
 import ListCategory from '@components/sessions/ListCategories';
 import ListBook from '@components/sessions/ListBooks';
 import BreadCrumb from '@components/sessions/BreadCrumb';
@@ -24,7 +23,7 @@ const Home = () => {
   const [listCategories, setListCategories] = useState<ICategory[] | undefined>([]);
   const [selectedCategory, setSelectedCategory] = useState<string>('');
   const [isOpenFilter, setIsOpenFilter] = useState<boolean>(false);
-  const [isOpenSideBar, setIsOpenSideBar] = useState<boolean>(false);
+  const [isOpenCategoriesOnMobile, setIsOpenCategoriesOnMobile] = useState<boolean>(false);
   const [isDisplayGrid, setIsDisplayGrid] = useState<boolean>(false);
   const [sortOption, setSortOption] = useState({ title: true, published: false });
   const [valueSearch, setValueSearch] = useState<string>('');
@@ -39,8 +38,7 @@ const Home = () => {
    */
   const fetchBooks = async () => {
     loadingBooks(true);
-    const url = `${process.env.VITE_BASE_URL}/${endpoint.BooksBaseUrl}`;
-    const data = await getData(url);
+    const data = await getListBook();
     loadingBooks(false);
 
     setListBooks(data);
@@ -54,29 +52,28 @@ const Home = () => {
   /**
    * Get categories from API
    */
-  const fetchCategory = async () => {
-    const url = `${process.env.VITE_BASE_URL}/${endpoint.CategoriesBaseUrl}`;
-    const data = await getData(url);
+  const fetchCategories = async () => {
+    const data = await getCategories();
     setListCategories(data);
   };
 
   useEffect(() => {
-    fetchCategory();
+    fetchCategories();
   }, []);
 
   /**
    * List books when click category name
-   * @param {categoryName} string
+   * @param {name} string
    * @returns {list items} books
    */
-  const handleFilterBooksByCategoryName = (categoryName: string) => {
-    setSelectedCategory(categoryName);
+  const handleFilterBooksByCategoryName = (name: string) => {
+    setSelectedCategory(name);
 
     // Get list filter books with category name
-    const newListByCategory = filterBooksByCategoryName(listBooks, categoryName);
+    const newListByCategory = filterBooksByCategoryName(listBooks, name);
 
     setListBooksFilter(newListByCategory);
-    setIsOpenSideBar(false);
+    setIsOpenCategoriesOnMobile(false);
     setIsOpenFilter(false);
   };
 
@@ -145,36 +142,36 @@ const Home = () => {
   };
 
   /**
-   * Handle toggle show sidebar
-   * @param {function} toggleSideBar
+   * Handle toggle show categories on mobile
+   * @param {function} toggleCategoriesOnMobile
    */
-  const toggleSideBar = (): void => {
-    setIsOpenSideBar(!isOpenSideBar);
+  const toggleCategoriesOnMobile = (): void => {
+    setIsOpenCategoriesOnMobile(!isOpenCategoriesOnMobile);
   };
 
   /**
-   * Handle toggle hide sidebar
-   * @param {function} handleCloseSideBar
+   * Handle toggle hide categories on mobile
+   * @param {function} handleCloseCategoriesOnMobile
    */
-  const handleCloseSideBar = useCallback(() => {
-    setIsOpenSideBar(!isOpenSideBar);
-  }, [isOpenSideBar]);
+  const handleCloseCategoriesOnMobile = useCallback(() => {
+    setIsOpenCategoriesOnMobile(!isOpenCategoriesOnMobile);
+  }, [isOpenCategoriesOnMobile]);
 
   /**
    * Handle display option is grid or list
-   * @param {function} handleDisplay
+   * @param {function} handleDisplayBooks
    */
-  const handleDisplay = (): void => {
+  const handleDisplayBooks = (): void => {
     setIsDisplayGrid((prev) => !prev);
     setIsOpenFilter(false);
   };
 
   /**
    * Handle sort option width title or published
-   * @param {function} handleSort
+   * @param {function} handleSortBooks
    * @returns {list items} list books with sort keys
    */
-  const handleSort = (): void => {
+  const handleSortBooks = (): void => {
     sortedBookList(listBooksFilter, sortOption);
     setSortOption((prev) => {
       return {
@@ -188,8 +185,8 @@ const Home = () => {
   return (
     <div className={`${isChangeDarkTheme ? 'container' : 'container dark-theme'}`}>
       <Header
-        isOpenSideBar={isOpenSideBar}
-        onToggleSideBar={toggleSideBar}
+        isOpenCategoriesOnMobile={isOpenCategoriesOnMobile}
+        onToggleCategoriesOnMobile={toggleCategoriesOnMobile}
         valueSearch={valueSearch}
         onSearchChange={handleSearchChange}
         isChangeDarkTheme={isChangeDarkTheme}
@@ -197,7 +194,7 @@ const Home = () => {
       />
       <main className="main-site">
         <aside className="column-sidebar">
-          <Button className="btn btn-close-menu" onClick={handleCloseSideBar} />
+          <Button className="btn btn-close-menu" onClick={handleCloseCategoriesOnMobile} />
           <div className="book-category-title">Categories</div>
           <div className="book-category-list">A curated list of every book ever written</div>
           <ListCategory
@@ -212,14 +209,14 @@ const Home = () => {
             <div className={`filter ${isOpenFilter ? 'open' : ''}`}>
               <Button className="btn btn-filter" label="Filter" onClick={toggleFilter} />
               <div className="filter-box">
-                <FilterDisplay onDisplay={handleDisplay} displayOption={isDisplayGrid} />
-                <FilterSort onSort={handleSort} sortOption={sortOption} />
+                <FilterDisplay onDisplayBooks={handleDisplayBooks} isDisplayBooks={isDisplayGrid} />
+                <FilterSort onSortBooks={handleSortBooks} sortOption={sortOption} />
               </div>
             </div>
           </div>
           <ListBook
             listBook={listBooksFilter}
-            displayOption={isDisplayGrid}
+            isDisplayBooks={isDisplayGrid}
             onToggleModal={toggleModal}
           />
           <Modal
