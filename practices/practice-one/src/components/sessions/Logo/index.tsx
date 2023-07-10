@@ -17,7 +17,7 @@ const Logo = ({ onToggleCategoriesOnMobile }: LogoProps) => {
           altText="Book Shelter"
           height="44"
           imageSrc={logo}
-          loading="lazy"
+          loading="eager"
           width="54"
           text="BookShelter"
         />
