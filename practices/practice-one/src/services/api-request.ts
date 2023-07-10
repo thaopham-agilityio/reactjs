@@ -23,7 +23,7 @@ export const getListBook = async (): Promise<IBook[] | undefined> => {
 
 export const getCategories = async (): Promise<ICategory[] | undefined> => {
   const res = await getData<ICategory[]>(
-    `${process.env.API_ENDPOINT}/${endpoint.CategoriesBaseUrl}`
+    `${process.env.VITE_BASE_URL}/${endpoint.CategoriesBaseUrl}`
   );
 
   try {
