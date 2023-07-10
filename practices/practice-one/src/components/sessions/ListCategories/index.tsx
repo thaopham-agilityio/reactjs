@@ -5,7 +5,7 @@ import { CATEGORY_MESSAGES } from '@constants/error-messages';
 interface ListCategoryProps {
   categoryList: ICategory[] | undefined;
   categorySelected: string;
-  onSelectCategory: (category: string) => void;
+  onSelectCategory: (name: string) => void;
 }
 
 const ListCategory = ({ categoryList, categorySelected, onSelectCategory }: ListCategoryProps) => {
