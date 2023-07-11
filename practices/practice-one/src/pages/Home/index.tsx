@@ -9,7 +9,7 @@ import { sortedBookList } from '@helpers/book';
 import { useDebounce } from '@hooks/use-debounce';
 import { TIME_OUT } from '@constants/time-out';
 import { Modal } from '@components/sessions/Modal';
-import { getCategories, getListBook } from '@services/api-request';
+import { getCategories, getBooks } from '@services/api-request';
 import ListCategory from '@components/sessions/ListCategories';
 import ListBook from '@components/sessions/ListBooks';
 import BreadCrumb from '@components/sessions/BreadCrumb';
@@ -20,7 +20,7 @@ import { BookDetail } from '@components/sessions/Modal/BookDetail';
 const Home = () => {
   const [listBooks, setListBooks] = useState<IBook[] | undefined>([]);
   const [listBooksFilter, setListBooksFilter] = useState<IBook[] | undefined>([]);
-  const [loading, setLoading] = useState<boolean>(false);
+  const [isLoading, setISLoading] = useState<boolean>(false);
   const [listCategories, setListCategories] = useState<ICategory[] | undefined>([]);
   const [selectedCategory, setSelectedCategory] = useState<string>('');
   const [isOpenFilter, setIsOpenFilter] = useState<boolean>(false);
@@ -38,9 +38,9 @@ const Home = () => {
    *
    */
   const fetchBooks = async () => {
-    setLoading(true);
-    const data = await getListBook();
-    setLoading(false);
+    setISLoading(true);
+    const data = await getBooks();
+    setISLoading(false);
 
     setListBooks(data);
     setListBooksFilter(data);
@@ -215,7 +215,7 @@ const Home = () => {
               </div>
             </div>
           </div>
-          {loading ? (
+          {isLoading ? (
             <div className="loading-indicator">
               <div className="loading"></div>
             </div>
