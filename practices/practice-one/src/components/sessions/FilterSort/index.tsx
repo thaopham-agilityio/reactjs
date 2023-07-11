@@ -1,4 +1,5 @@
 import { Button } from '@components/common/Button/index';
+import { memo } from 'react';
 
 interface FilterSortProps {
   onSortBooks: () => void;
@@ -8,7 +9,7 @@ interface FilterSortProps {
   };
 }
 
-const FilterSort = ({ onSortBooks, sortOption }: FilterSortProps) => {
+const FilterSort = memo(({ onSortBooks, sortOption }: FilterSortProps) => {
   const { isSortByAlphabet, isSortByYear } = sortOption || {};
 
   return (
@@ -28,6 +29,6 @@ const FilterSort = ({ onSortBooks, sortOption }: FilterSortProps) => {
       </div>
     </div>
   );
-};
+});
 
 export default FilterSort;

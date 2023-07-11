@@ -1,12 +1,13 @@
 import { Button } from '@components/common/Button/index';
 import { Image } from '@components/common/Image/index';
 import logo from '@image/book-shelter.svg';
+import { memo } from 'react';
 
 interface LogoProps {
   onToggleCategoriesOnMobile: () => void;
 }
 
-const Logo = ({ onToggleCategoriesOnMobile }: LogoProps) => {
+const Logo = memo(({ onToggleCategoriesOnMobile }: LogoProps) => {
   return (
     <section className="header-left">
       <span className="header-toogle">
@@ -17,6 +18,6 @@ const Logo = ({ onToggleCategoriesOnMobile }: LogoProps) => {
       </a>
     </section>
   );
-};
+});
 
 export default Logo;

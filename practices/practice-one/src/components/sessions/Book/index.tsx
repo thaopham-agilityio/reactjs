@@ -1,5 +1,6 @@
 import { Card } from '@components/common/Card';
 import { IBook } from '@interface/book';
+import { memo } from 'react';
 
 interface BookProps {
   book: IBook;
@@ -7,7 +8,7 @@ interface BookProps {
   toggleModal: (book: IBook) => void;
 }
 
-const BookItem = ({ book, isDisplayBooks, toggleModal }: BookProps) => {
+const BookItem = memo(({ book, isDisplayBooks, toggleModal }: BookProps) => {
   const onToggleModal = () => {
     toggleModal(book);
   };
@@ -17,6 +18,6 @@ const BookItem = ({ book, isDisplayBooks, toggleModal }: BookProps) => {
       <Card width="200" height="200" book={book} onClick={onToggleModal} />
     </li>
   );
-};
+});
 
 export default BookItem;

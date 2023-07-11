@@ -1,3 +1,5 @@
+import { memo } from 'react';
+
 // Define the props for the Image component
 interface ImageProps {
   text?: string;
@@ -10,11 +12,11 @@ interface ImageProps {
 /**
  * Primary UI component for user interaction
  */
-export const Image = ({ text, imageSrc, altText, width, height }: ImageProps) => {
+export const Image = memo(({ text, imageSrc, altText, width, height }: ImageProps) => {
   return (
     <div className="img-container">
       {<img className="img-item" src={imageSrc} width={width} height={height} alt={altText} />}
       {!!text && <h1 className="text">{text}</h1>}
     </div>
   );
-};
+});

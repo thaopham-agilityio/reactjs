@@ -1,4 +1,5 @@
 import { ICategory } from '@interface/category';
+import { memo } from 'react';
 
 interface CategoryProps {
   category: ICategory;
@@ -6,7 +7,7 @@ interface CategoryProps {
   onSelectCategory: (name: string) => void;
 }
 
-const Category = ({ category, categorySelected, onSelectCategory }: CategoryProps) => {
+const Category = memo(({ category, categorySelected, onSelectCategory }: CategoryProps) => {
   const { id, name, total } = category || {};
 
   const handleSelectCategory = () => {
@@ -28,6 +29,6 @@ const Category = ({ category, categorySelected, onSelectCategory }: CategoryProp
       <div className="book-category-total">{`${total}`}</div>
     </li>
   );
-};
+});
 
 export default Category;

@@ -1,12 +1,12 @@
 import { Input } from '@components/common/Input/index';
-import { ChangeEvent } from 'react';
+import { ChangeEvent, memo } from 'react';
 
 interface SearchProps {
   valueSearch: string;
   onSearchChange: (e: ChangeEvent<HTMLInputElement>) => void;
 }
 
-const Search = ({ valueSearch, onSearchChange }: SearchProps) => {
+const Search = memo(({ valueSearch, onSearchChange }: SearchProps) => {
   return (
     <Input
       type="search"
@@ -16,6 +16,6 @@ const Search = ({ valueSearch, onSearchChange }: SearchProps) => {
       onChange={onSearchChange}
     />
   );
-};
+});
 
 export default Search;
