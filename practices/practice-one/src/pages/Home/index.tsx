@@ -1,33 +1,34 @@
-import Header from '@components/sessions/Header';
 import { ChangeEvent, useCallback, useEffect, useState } from 'react';
-import { IBook } from '@interface/book';
-import { ICategory } from '@interface/category';
-import { filterBooksByCategoryName, getCategoryWithTotalItem } from '@helpers/category';
-import { Search } from '@helpers/book';
-import { Button } from '@components/common/Button';
-import { sortedBookList } from '@helpers/book';
-import { useDebounce } from '@hooks/use-debounce';
-import { TIME_OUT } from '@constants/time-out';
-import { Modal } from '@components/sessions/Modal';
-import { getCategories, getBooks } from '@services/api-request';
+import Header from '@components/sessions/Header';
 import ListCategory from '@components/sessions/ListCategories';
 import ListBook from '@components/sessions/ListBooks';
 import BreadCrumb from '@components/sessions/BreadCrumb';
 import FilterDisplay from '@components/sessions/FilterDisplay';
 import FilterSort from '@components/sessions/FilterSort';
-import { BookDetail } from '@components/sessions/Modal/BookDetail';
+import { IBook } from '@interface/book';
+import { LoadingIndicator } from '@components/common/LoadingIndicator';
+import { getCategories, getBooks } from '@services/api-request';
+import { BookDetail } from '@components/sessions/BookDetail';
+import { Search } from '@helpers/book';
+import { ICategory } from '@interface/category';
+import { filterBooksByCategoryName, getCategoryWithTotalItem } from '@helpers/category';
+import { Button } from '@components/common/Button';
+import { sortedBookList } from '@helpers/book';
+import { useDebounce } from '@hooks/use-debounce';
+import { TIME_OUT } from '@constants/time-out';
+import { Modal } from '@components/sessions/Modal';
 
 const Home = () => {
   const [listBooks, setListBooks] = useState<IBook[] | undefined>([]);
   const [listBooksFilter, setListBooksFilter] = useState<IBook[] | undefined>([]);
-  const [isLoading, setISLoading] = useState<boolean>(false);
+  const [isLoading, setIsLoading] = useState<boolean>(false);
+  const [valueSearch, setValueSearch] = useState<string>('');
   const [listCategories, setListCategories] = useState<ICategory[] | undefined>([]);
   const [selectedCategory, setSelectedCategory] = useState<string>('');
   const [isOpenFilter, setIsOpenFilter] = useState<boolean>(false);
   const [isOpenCategoriesOnMobile, setIsOpenCategoriesOnMobile] = useState<boolean>(false);
   const [isDisplayGrid, setIsDisplayGrid] = useState<boolean>(false);
   const [sortOption, setSortOption] = useState({ isSortByAlphabet: true, isSortByYear: false });
-  const [valueSearch, setValueSearch] = useState<string>('');
   const [isOpenModal, setIsOpenModal] = useState<boolean>(false);
   const [bookSelected, setBookSelected] = useState<IBook>({} as IBook);
   const [isChangeDarkTheme, setIsChangeDarkTheme] = useState<boolean>(true);
@@ -38,9 +39,9 @@ const Home = () => {
    *
    */
   const fetchBooks = async () => {
-    setISLoading(true);
+    setIsLoading(true);
     const data = await getBooks();
-    setISLoading(false);
+    setIsLoading(false);
 
     setListBooks(data);
     setListBooksFilter(data);
@@ -216,9 +217,7 @@ const Home = () => {
             </div>
           </div>
           {isLoading ? (
-            <div className="loading-indicator">
-              <div className="loading"></div>
-            </div>
+            <LoadingIndicator isLoading={true} />
           ) : (
             <ListBook
               listBook={listBooksFilter}
@@ -233,7 +232,7 @@ const Home = () => {
             isThemeModal={isThemeModal}
             title={bookSelected.title}
           >
-            <BookDetail width="128" height="170" book={bookSelected} />
+            <BookDetail loading="lazy" width="128" height="170" book={bookSelected} />
           </Modal>
         </section>
       </main>
