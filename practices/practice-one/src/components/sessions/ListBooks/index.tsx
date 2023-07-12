@@ -1,7 +1,6 @@
 import { BOOKS_MESSAGES } from '@constants/error-messages';
 import { IBook } from '@interface/book';
-import BookItem from '../Book';
-import { memo } from 'react';
+import BookItem from '../BookItem';
 
 interface ListBookProps {
   listBook: IBook[] | undefined;
@@ -9,7 +8,7 @@ interface ListBookProps {
   onToggleModal: (book: IBook) => void;
 }
 
-const ListBook = memo(({ listBook, isDisplayBooks, onToggleModal }: ListBookProps) => {
+const ListBook = ({ listBook, isDisplayBooks, onToggleModal }: ListBookProps) => {
   const renderListBook = () => {
     return listBook?.map((book) => (
       <BookItem
@@ -32,6 +31,6 @@ const ListBook = memo(({ listBook, isDisplayBooks, onToggleModal }: ListBookProp
       </ul>
     </div>
   );
-});
+};
 
 export default ListBook;
