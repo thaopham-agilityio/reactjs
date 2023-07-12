@@ -3,7 +3,6 @@ import { memo } from 'react';
 
 // Define the props for the Modal Detail component
 interface BookDetailProps {
-  loading: 'lazy' | 'eager';
   width: string;
   height: string;
   book: Partial<IBook>;
@@ -13,7 +12,6 @@ interface BookDetailProps {
  */
 export const BookDetail = memo(
   ({
-    loading,
     width,
     height,
     book: { title, description, author, published, publishers, image },
@@ -22,14 +20,7 @@ export const BookDetail = memo(
       <div className="modal-content">
         <figure className="modal-container-content">
           <div className="modal-container-img">
-            <img
-              className="img-item"
-              loading={loading}
-              src={image}
-              width={width}
-              height={height}
-              alt={title}
-            />
+            <img className="img-item" src={image} width={width} height={height} alt={title} />
           </div>
           <figcaption className="modal-container-text">
             <p className="modal-desc">{description}</p>
