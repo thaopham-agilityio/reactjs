@@ -13,10 +13,10 @@
     "prepare": "cd ../.. && husky install practices/practice-one/.husky"
   },
   "dependencies": {
-    "axios": "^1.4.0",
-    "json-server": "^0.17.3"
   },
   "devDependencies": {
+    "axios": "^1.4.0",
+    "json-server": "^0.17.3",
     "clsx": "^1.2.1",
     "@commitlint/cli": "^17.6.5",
     "@commitlint/config-conventional": "^17.6.5",
