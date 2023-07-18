@@ -217,7 +217,7 @@ const Home = () => {
             </div>
           </div>
           {isLoading ? (
-            <LoadingIndicator isLoading={true} />
+            <LoadingIndicator />
           ) : (
             <ListBook
               listBook={listBooksFilter}
