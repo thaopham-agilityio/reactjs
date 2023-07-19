@@ -271,6 +271,10 @@
     }
 
     @include only-for-tablet() {
+      flex-basis: calc(50% - 22px);
+    }
+
+    @include only-for-desktop() {
       flex-basis: calc(33.33333333% - 22px);
     }
   }
