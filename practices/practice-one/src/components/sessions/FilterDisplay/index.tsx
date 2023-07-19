@@ -1,12 +1,11 @@
-import { Button } from '@components/common/Button/index';
-import { memo } from 'react';
+import { Button } from '@components/common/Button';
 
 interface FilterDisplayProps {
   onDisplayBooks: () => void;
   isDisplayBooks: boolean;
 }
 
-const FilterDisplay = memo(({ onDisplayBooks, isDisplayBooks }: FilterDisplayProps) => {
+const FilterDisplay = ({ onDisplayBooks, isDisplayBooks }: FilterDisplayProps): JSX.Element => {
   return (
     <div className="filter-display">
       <div className="filter-title">Display Options</div>
@@ -24,6 +23,6 @@ const FilterDisplay = memo(({ onDisplayBooks, isDisplayBooks }: FilterDisplayPro
       </div>
     </div>
   );
-});
+};
 
 export default FilterDisplay;

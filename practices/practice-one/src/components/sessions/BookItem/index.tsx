@@ -7,14 +7,14 @@ interface BookProps {
   toggleModal: (book: IBook) => void;
 }
 
-const BookItem = ({ book, isDisplayBooks, toggleModal }: BookProps) => {
-  const onToggleModal = () => {
+const BookItem = ({ book, isDisplayBooks, toggleModal }: BookProps): JSX.Element => {
+  const onToggleModal = (): void => {
     toggleModal(book);
   };
 
   return (
     <li className={`book-item ${isDisplayBooks ? 'list' : ''}`}>
-      <Card width="200" height="200" book={book} onClick={onToggleModal} />
+      <Card loading="lazy" width="200" height="200" book={book} onClick={onToggleModal} />
     </li>
   );
 };

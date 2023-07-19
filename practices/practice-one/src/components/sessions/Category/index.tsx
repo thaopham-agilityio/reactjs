@@ -1,5 +1,4 @@
 import { ICategory } from '@interface/category';
-import { memo } from 'react';
 
 interface CategoryProps {
   category: ICategory;
@@ -7,28 +6,28 @@ interface CategoryProps {
   onSelectCategory: (name: string) => void;
 }
 
-const Category = memo(({ category, categorySelected, onSelectCategory }: CategoryProps) => {
-  const { id, name, total } = category || {};
+const Category = ({ category, categorySelected, onSelectCategory }: CategoryProps): JSX.Element => {
+  const { id = 'all', name = 'All books', total = 18 } = category || {};
 
-  const handleSelectCategory = () => {
+  const handleSelectCategory = (): void => {
     onSelectCategory(name);
   };
 
   return (
     <li
-      className={name === categorySelected ? 'book-category-item selected' : 'book-category-item'}
+      className={`book-category-item ${name === categorySelected ? 'selected' : ''}`}
       data-id={id}
       onClick={handleSelectCategory}
     >
       <div className="book-category-name">
         <span className={['book-category-shorthand', `book-category-${name}`].join(' ')}>
-          {JSON.stringify(name).slice(1, 3)}
+          {name.substring(0, 2)}
         </span>
         {name}
       </div>
-      <div className="book-category-total">{`${total}`}</div>
+      <div className="book-category-total">{total}</div>
     </li>
   );
-});
+};
 
 export default Category;

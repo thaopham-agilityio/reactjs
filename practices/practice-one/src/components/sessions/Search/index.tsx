@@ -1,12 +1,12 @@
-import { Input } from '@components/common/Input/index';
-import { ChangeEvent, memo } from 'react';
+import { Input } from '@components/common/Input';
+import { ChangeEvent } from 'react';
 
 interface SearchProps {
   valueSearch: string;
   onSearchChange: (e: ChangeEvent<HTMLInputElement>) => void;
 }
 
-const Search = memo(({ valueSearch, onSearchChange }: SearchProps) => {
+const Search = ({ valueSearch, onSearchChange }: SearchProps): JSX.Element => {
   return (
     <Input
       type="search"
@@ -16,6 +16,6 @@ const Search = memo(({ valueSearch, onSearchChange }: SearchProps) => {
       onChange={onSearchChange}
     />
   );
-});
+};
 
 export default Search;

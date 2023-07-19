@@ -1,6 +1,6 @@
 import { BOOKS_MESSAGES } from '@constants/error-messages';
 import { IBook } from '@interface/book';
-import BookItem from '../BookItem';
+import BookItem from '@components/sessions/BookItem';
 
 interface ListBookProps {
   listBook: IBook[] | undefined;
@@ -8,8 +8,8 @@ interface ListBookProps {
   onToggleModal: (book: IBook) => void;
 }
 
-const ListBook = ({ listBook, isDisplayBooks, onToggleModal }: ListBookProps) => {
-  const renderListBook = () => {
+const ListBook = ({ listBook, isDisplayBooks, onToggleModal }: ListBookProps): JSX.Element => {
+  const renderListBook = (): JSX.Element[] | undefined => {
     return listBook?.map((book) => (
       <BookItem
         key={book.id}
@@ -22,13 +22,11 @@ const ListBook = ({ listBook, isDisplayBooks, onToggleModal }: ListBookProps) =>
 
   return (
     <div className="book-list-wrapper">
-      <ul className="book-list">
-        {!listBook?.length ? (
-          <li className="book-item not-found">{BOOKS_MESSAGES.NO_DATA}</li>
-        ) : (
-          renderListBook()
-        )}
-      </ul>
+      {listBook?.length ? (
+        <ul className="book-list">{renderListBook()}</ul>
+      ) : (
+        <p className="book-item not-found">{BOOKS_MESSAGES.NO_DATA}</p>
+      )}
     </div>
   );
 };

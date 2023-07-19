@@ -1,8 +1,8 @@
 import { IBook } from '@interface/book';
-import { memo } from 'react';
 
 // Define the props for the Card component
 interface CardProps {
+  loading: 'lazy' | 'eager';
   width: string;
   height: string;
 
@@ -13,14 +13,32 @@ interface CardProps {
 /**
  * Primary UI component for user interaction
  */
-export const Card = memo(({ width, height, book, onClick }: CardProps) => {
-  const { title, author, published, image } = book;
+export const Card = ({
+  loading = 'lazy',
+  width = '200',
+  height = '200',
+  book,
+  onClick,
+}: CardProps): JSX.Element => {
+  const {
+    title = 'Angels and demons',
+    author = 'Stuart Matt',
+    published = '2021',
+    image = 'https://picsum.photos/200/200',
+  } = book;
 
   return (
     <div onClick={onClick}>
       <figure className="card-container">
         <div className="card-container-img">
-          <img className="img-item" src={image} width={width} height={height} alt={title} />
+          <img
+            className="img-item"
+            loading={loading}
+            src={image}
+            width={width}
+            height={height}
+            alt={title}
+          />
         </div>
         <figcaption>
           <h2 className="card-title">{title}</h2>
@@ -30,4 +48,4 @@ export const Card = memo(({ width, height, book, onClick }: CardProps) => {
       </figure>
     </div>
   );
-});
+};

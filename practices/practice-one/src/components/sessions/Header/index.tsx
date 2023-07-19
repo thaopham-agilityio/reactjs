@@ -1,7 +1,7 @@
-import { ChangeEvent, memo } from 'react';
-import Logo from '../Logo';
-import Search from '../Search';
-import DarkTheme from '../Theme';
+import { ChangeEvent } from 'react';
+import Logo from '@components/sessions/Logo';
+import Search from '@components/sessions/Search';
+import DarkTheme from '@components/sessions/Theme';
 
 interface HeaderProps {
   isOpenCategoriesOnMobile: boolean;
@@ -12,25 +12,23 @@ interface HeaderProps {
   onToggleThemePage: () => void;
 }
 
-const Header = memo(
-  ({
-    isOpenCategoriesOnMobile,
-    onToggleCategoriesOnMobile,
-    valueSearch,
-    onSearchChange,
-    isChangeDarkTheme,
-    onToggleThemePage,
-  }: HeaderProps) => {
-    return (
-      <header className={`header-site ${isOpenCategoriesOnMobile ? 'open' : ''}`}>
-        <Logo onToggleCategoriesOnMobile={onToggleCategoriesOnMobile} />
-        <section className="header-right">
-          <Search valueSearch={valueSearch} onSearchChange={onSearchChange} />
-          <DarkTheme isChangeDarkTheme={isChangeDarkTheme} toggleThemePage={onToggleThemePage} />
-        </section>
-      </header>
-    );
-  }
-);
+const Header = ({
+  isOpenCategoriesOnMobile,
+  onToggleCategoriesOnMobile,
+  valueSearch,
+  onSearchChange,
+  isChangeDarkTheme,
+  onToggleThemePage,
+}: HeaderProps): JSX.Element => {
+  return (
+    <header className={`header-site ${isOpenCategoriesOnMobile ? 'open' : ''}`}>
+      <Logo onToggleCategoriesOnMobile={onToggleCategoriesOnMobile} />
+      <section className="header-right">
+        <Search valueSearch={valueSearch} onSearchChange={onSearchChange} />
+        <DarkTheme isChangeDarkTheme={isChangeDarkTheme} toggleThemePage={onToggleThemePage} />
+      </section>
+    </header>
+  );
+};
 
 export default Header;

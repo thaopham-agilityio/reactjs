@@ -36,6 +36,14 @@
 
     &-wrapper {
       padding: 14px;
+
+      .book-item {
+        &.not-found {
+          color: $color-warning;
+          cursor: default;
+          margin: 0 26px;
+        }
+      }
     }
 
     &-title {
@@ -69,11 +77,6 @@
       padding: 8px 24px;
       flex-basis: 100%;
 
-      &.not-found {
-        color: $color-warning;
-        cursor: default;
-      }
-
       &.selected {
         background: $bg-color-primary;
       }
@@ -82,6 +85,7 @@
     &-name {
       @extend %flex;
       @extend %item-center;
+      @extend %text-capitalize;
     }
 
     &-total {
@@ -99,6 +103,10 @@
       font-weight: $font-weight-bold;
       color: $color-secondary;
       margin-right: 10px;
+    }
+
+    &-All {
+      background-color: $bg-color-category-All;
     }
 
     &-Adventure {
@@ -209,6 +217,7 @@
     &.not-found {
       color: $color-warning;
       cursor: default;
+      margin: 0;
     }
 
     &.list {

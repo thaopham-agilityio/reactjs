@@ -1,24 +1,39 @@
+// Libs
 import { ChangeEvent, useCallback, useEffect, useState } from 'react';
+
+// Common Components
+import { LoadingIndicator } from '@components/common/LoadingIndicator';
+import { Button } from '@components/common/Button';
+import { Modal } from '@components/common/Modal';
+
+// Session Components
 import Header from '@components/sessions/Header';
 import ListCategory from '@components/sessions/ListCategories';
 import ListBook from '@components/sessions/ListBooks';
 import BreadCrumb from '@components/sessions/BreadCrumb';
 import FilterDisplay from '@components/sessions/FilterDisplay';
 import FilterSort from '@components/sessions/FilterSort';
-import { IBook } from '@interface/book';
-import { LoadingIndicator } from '@components/common/LoadingIndicator';
-import { getCategories, getBooks } from '@services/api-request';
 import { BookDetail } from '@components/sessions/BookDetail';
-import { Search } from '@helpers/book';
-import { ICategory } from '@interface/category';
-import { filterBooksByCategoryName, getCategoryWithTotalItem } from '@helpers/category';
-import { Button } from '@components/common/Button';
-import { sortedBookList } from '@helpers/book';
-import { useDebounce } from '@hooks/use-debounce';
-import { TIME_OUT } from '@constants/time-out';
-import { Modal } from '@components/sessions/Modal';
 
-const Home = () => {
+// Interface
+import { IBook } from '@interface/book';
+import { ICategory } from '@interface/category';
+
+// Services
+import { getCategories, getBooks } from '@services/api-request';
+
+// Helpers
+import { Search } from '@helpers/book';
+import { filterBooksByCategoryName, getCategoryWithTotalItem } from '@helpers/category';
+import { sortedBookList } from '@helpers/book';
+
+// Hooks
+import { useDebounce } from '@hooks/use-debounce';
+
+// Constants
+import { TIME_OUT } from '@constants/time-out';
+
+const Home = (): JSX.Element => {
   const [listBooks, setListBooks] = useState<IBook[] | undefined>([]);
   const [listBooksFilter, setListBooksFilter] = useState<IBook[] | undefined>([]);
   const [isLoading, setIsLoading] = useState<boolean>(false);
@@ -38,7 +53,7 @@ const Home = () => {
    * Get data from API and set to list books & list books filter
    *
    */
-  const fetchBooks = async () => {
+  const fetchBooks = async (): Promise<void> => {
     setIsLoading(true);
     const data = await getBooks();
     setIsLoading(false);
@@ -54,7 +69,7 @@ const Home = () => {
   /**
    * Get categories from API
    */
-  const fetchCategories = async () => {
+  const fetchCategories = async (): Promise<void> => {
     const data = await getCategories();
     setListCategories(data);
   };
@@ -68,7 +83,7 @@ const Home = () => {
    * @param {name} string
    * @returns {list items} books
    */
-  const handleFilterBooksByCategoryName = (name: string) => {
+  const handleFilterBooksByCategoryName = (name: string): void => {
     setSelectedCategory(name);
 
     // Get list filter books with category name
@@ -91,7 +106,7 @@ const Home = () => {
    * @param {function} handleSearchChange
    * @returns {list items} list books with keyword search
    */
-  const handleSearchChange = (e: ChangeEvent<HTMLInputElement>) => {
+  const handleSearchChange = (e: ChangeEvent<HTMLInputElement>): void => {
     const { value } = e.target;
     setValueSearch(value);
     setSelectedCategory('All Books');
@@ -131,7 +146,7 @@ const Home = () => {
   isOpenModal && document.addEventListener('keydown', handleKeyDown);
 
   // Function to handle toggle the modal theme
-  const toggleThemeModal = () => {
+  const toggleThemeModal = (): void => {
     setIsThemeModal(!isThemeModal);
   };
 
@@ -155,7 +170,7 @@ const Home = () => {
    * Handle toggle hide categories on mobile
    * @param {function} handleCloseCategoriesOnMobile
    */
-  const handleCloseCategoriesOnMobile = useCallback(() => {
+  const handleCloseCategoriesOnMobile = useCallback((): void => {
     setIsOpenCategoriesOnMobile(!isOpenCategoriesOnMobile);
   }, [isOpenCategoriesOnMobile]);
 
@@ -185,7 +200,7 @@ const Home = () => {
   };
 
   return (
-    <div className={`${isChangeDarkTheme ? 'container' : 'container dark-theme'}`}>
+    <div className={`container ${isChangeDarkTheme ? '' : 'dark-theme'}`}>
       <Header
         isOpenCategoriesOnMobile={isOpenCategoriesOnMobile}
         onToggleCategoriesOnMobile={toggleCategoriesOnMobile}
@@ -226,13 +241,13 @@ const Home = () => {
             />
           )}
           <Modal
-            showModal={isOpenModal}
+            isShowModal={isOpenModal}
             onCloseModal={toggleModal}
             onToggleThemeModal={toggleThemeModal}
             isThemeModal={isThemeModal}
             title={bookSelected.title}
           >
-            <BookDetail width="128" height="170" book={bookSelected} />
+            <BookDetail loading="lazy" width="128" height="170" book={bookSelected} />
           </Modal>
         </section>
       </main>
