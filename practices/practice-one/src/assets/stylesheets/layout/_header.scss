@@ -15,7 +15,7 @@
       border-radius: 0;
     }
 
-    @include only-for-desktop() {
+    @include only-for-tablet() {
       border-radius: 10px 10px 0 0;
       padding: 8px 40px 8px 50px;
     }
@@ -42,7 +42,7 @@
       @extend %inline-flex;
     }
 
-    @include only-for-desktop() {
+    @include only-for-tablet() {
       display: none;
     }
   }

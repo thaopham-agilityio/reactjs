@@ -11,7 +11,7 @@
     .text {
       @extend %none;
 
-      @include only-for-desktop() {
+      @include only-for-tablet() {
         display: block;
         font-family: $tertiary-family;
         font-size: $text-logo;

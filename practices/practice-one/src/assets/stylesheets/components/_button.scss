@@ -29,13 +29,13 @@
     }
 
     &-menu {
-      @include only-for-desktop() {
+      @include only-for-tablet() {
         display: none;
       }
     }
 
     &-modal {
-      @include only-for-desktop() {
+      @include only-for-tablet() {
         top: 23px;
         right: 0;
         background: url('/src/assets/images/close-desktop.svg') 3px no-repeat;
@@ -107,7 +107,7 @@
     box-shadow: 0px 1px 3px $box-shadow-color-filter;
     margin-right: 20px;
 
-    @include only-for-desktop() {
+    @include only-for-tablet() {
       background-color: $bg-color-primary;
       margin-right: 0px;
       border: 1px solid $border-filter-button;

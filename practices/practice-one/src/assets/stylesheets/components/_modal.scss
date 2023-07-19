@@ -42,7 +42,7 @@
   &-footer {
     padding: 40px 25px 15px;
 
-    @include only-for-desktop() {
+    @include only-for-tablet() {
       background-color: $bg-color-header-modal;
       padding: 23px 30px;
       width: $width-modal-desktop;
@@ -56,7 +56,7 @@
     overflow-y: auto;
     height: calc(100vh - 184px);
 
-    @include only-for-desktop() {
+    @include only-for-tablet() {
       height: calc(100vh - 176px);
     }
   }
@@ -73,7 +73,7 @@
     min-height: 100vh;
     background-color: $bg-color-secondary;
 
-    @include only-for-desktop() {
+    @include only-for-tablet() {
       width: $width-modal-desktop;
     }
 
@@ -85,7 +85,7 @@
         @include size(128px, 170px);
         aspect-ratio: 3 / 4;
 
-        @include only-for-desktop() {
+        @include only-for-tablet() {
           width: 201px;
           height: 263px;
         }
