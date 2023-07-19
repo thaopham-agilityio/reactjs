@@ -18,7 +18,7 @@ const Logo = ({ onToggleCategoriesOnMobile }: LogoProps): JSX.Element => {
           altText="Book Shelter"
           height="44"
           imageSrc={logo}
-          loading="lazy"
+          loading="eager"
           width="54"
           text="BookShelter"
         />

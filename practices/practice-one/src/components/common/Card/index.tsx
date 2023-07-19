@@ -14,7 +14,7 @@ interface CardProps {
  * Primary UI component for user interaction
  */
 export const Card = ({
-  loading = 'lazy',
+  loading = 'eager',
   width = '200',
   height = '200',
   book,
