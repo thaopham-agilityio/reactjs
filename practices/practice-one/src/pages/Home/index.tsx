@@ -1,5 +1,5 @@
 // Libs
-import { ChangeEvent, useCallback, useEffect, useState } from 'react';
+import { ChangeEvent, memo, useCallback, useEffect, useState } from 'react';
 
 // Common Components
 import { LoadingIndicator } from '@components/common/LoadingIndicator';
@@ -33,7 +33,7 @@ import { useDebounce } from '@hooks/use-debounce';
 // Constants
 import { TIME_OUT } from '@constants/time-out';
 
-const Home = (): JSX.Element => {
+const Home = memo((): JSX.Element => {
   const [listBooks, setListBooks] = useState<IBook[] | undefined>([]);
   const [listBooksFilter, setListBooksFilter] = useState<IBook[] | undefined>([]);
   const [isLoading, setIsLoading] = useState<boolean>(false);
@@ -247,12 +247,12 @@ const Home = (): JSX.Element => {
             isThemeModal={isThemeModal}
             title={bookSelected.title}
           >
-            <BookDetail loading="eager" width="128" height="170" book={bookSelected} />
+            <BookDetail width="128" height="170" book={bookSelected} />
           </Modal>
         </section>
       </main>
     </div>
   );
-};
+});
 
 export default Home;
