@@ -15,7 +15,7 @@ const BookItem = memo(({ book, isDisplayBooks, toggleModal }: BookProps): JSX.El
 
   return (
     <li className={`book-item ${isDisplayBooks ? 'list' : ''}`}>
-      <Card loading="lazy" width="100" height="100" book={book} onClick={onToggleModal} />
+      <Card width="200" height="200" book={book} onClick={onToggleModal} />
     </li>
   );
 });
