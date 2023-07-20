@@ -19,7 +19,7 @@ export const Card = memo(
       title = 'Angels and demons',
       author = 'Stuart Matt',
       published = '2021',
-      image = 'https://picsum.photos/400/400',
+      imageMedium = 'https://picsum.photos/400/400',
       imageSmall = 'https://picsum.photos/200/200',
     } = book;
 
@@ -28,7 +28,7 @@ export const Card = memo(
         <figure className="card-container">
           <div className="card-container-img">
             <picture>
-              <source className="img-item" srcSet={image} media="(min-width: 768px)" />
+              <source className="img-item" srcSet={imageMedium} media="(min-width: 768px)" />
               <img
                 className="img-item"
                 src={imageSmall}

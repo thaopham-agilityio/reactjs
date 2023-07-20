@@ -4,7 +4,7 @@ export interface IBook {
   category: string;
   description: string;
   imageSmall: string;
-  image: string;
+  imageMedium: string;
   author: string;
   published: string;
   publishers: string;
