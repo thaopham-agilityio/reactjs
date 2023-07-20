@@ -14,13 +14,21 @@ export const BookDetail = memo(
   ({
     width,
     height,
-    book: { title, description, author, published, publishers, image },
+    book: { title, description, author, published, publishers, image, imageSmall },
   }: BookDetailProps): JSX.Element => {
     return (
       <div className="modal-content">
         <figure className="modal-container-content">
           <div className="modal-container-img">
-            <img className="img-item" src={image} width={width} height={height} alt={title} />
+            <img
+              className="img-item"
+              src={imageSmall}
+              srcSet={`${imageSmall} 400w, ${image} 800w`}
+              sizes="100vw"
+              width={width}
+              height={height}
+              alt={title}
+            />
           </div>
           <figcaption className="modal-container-text">
             <p className="modal-desc">{description}</p>
