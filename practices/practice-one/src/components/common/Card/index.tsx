@@ -19,14 +19,25 @@ export const Card = memo(
       title = 'Angels and demons',
       author = 'Stuart Matt',
       published = '2021',
-      image = 'https://picsum.photos/200/200',
+      imageSmall = 'https://picsum.photos/200/200',
+      image = 'https://picsum.photos/400/400',
     } = book;
 
     return (
       <div onClick={onClick}>
         <figure className="card-container">
           <div className="card-container-img">
-            <img className="img-item" src={image} width={width} height={height} alt={title} />
+            {/* <img className="img-item" src={image} width={width} height={height} alt={title} /> */}
+            <picture>
+              <source srcSet={`${image} 2x, ${imageSmall}`} media="(min-width: 768px)" />
+              <img
+                srcSet={`${image} 2x`}
+                src={imageSmall}
+                width={width}
+                height={height}
+                alt={title}
+              />
+            </picture>
           </div>
           <figcaption>
             <h2 className="card-title">{title}</h2>
