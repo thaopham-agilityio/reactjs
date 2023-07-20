@@ -31,6 +31,7 @@ export const Card = memo(
             <picture>
               <source srcSet={`${image} 2x, ${imageSmall}`} media="(min-width: 768px)" />
               <img
+                className="img-item"
                 srcSet={`${image} 2x`}
                 src={imageSmall}
                 width={width}
