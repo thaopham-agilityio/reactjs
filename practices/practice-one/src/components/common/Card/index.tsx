@@ -27,15 +27,17 @@ export const Card = memo(
       <div onClick={onClick}>
         <figure className="card-container">
           <div className="card-container-img">
-            <img
-              className="img-item"
-              src={imageSmall}
-              srcSet={`${imageSmall} 400w, ${image} 800w`}
-              sizes="50vw"
-              width={width}
-              height={height}
-              alt={title}
-            />
+            <picture>
+              <source className="img-item" srcSet={image} media="(min-width: 1024px)" />
+              <source className="img-item" srcSet={image} media="(min-width: 768px)" />
+              <img
+                className="img-item"
+                src={imageSmall}
+                width={width}
+                height={height}
+                alt={title}
+              />
+            </picture>
           </div>
           <figcaption>
             <h2 className="card-title">{title}</h2>
