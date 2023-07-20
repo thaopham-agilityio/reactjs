@@ -22,7 +22,6 @@ export const Default: Story = {
       author: 'Stuart Matt',
       imageMedium: 'https://picsum.photos/400/400',
       imageSmall: 'https://picsum.photos/200/200',
-      imageLarge: 'https://picsum.photos/800/800',
       published: '2021',
     },
   },
