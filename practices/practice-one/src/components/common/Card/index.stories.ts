@@ -20,7 +20,8 @@ export const Default: Story = {
     book: {
       title: 'Angels and demons',
       author: 'Stuart Matt',
-      image: 'https://picsum.photos/200/200',
+      imageMedium: 'https://picsum.photos/400/400',
+      imageSmall: 'https://picsum.photos/200/200',
       published: '2021',
     },
   },
