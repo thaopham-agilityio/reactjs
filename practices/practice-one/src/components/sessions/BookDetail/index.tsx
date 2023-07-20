@@ -21,7 +21,6 @@ export const BookDetail = memo(
         <figure className="modal-container-content">
           <div className="modal-container-img">
             <picture>
-              <source className="img-item" srcSet={image} media="(min-width: 1024px)" />
               <source className="img-item" srcSet={image} media="(min-width: 768px)" />
               <img
                 className="img-item"

@@ -28,7 +28,6 @@ export const Card = memo(
         <figure className="card-container">
           <div className="card-container-img">
             <picture>
-              <source className="img-item" srcSet={image} media="(min-width: 1024px)" />
               <source className="img-item" srcSet={image} media="(min-width: 768px)" />
               <img
                 className="img-item"
