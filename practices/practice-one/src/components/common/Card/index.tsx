@@ -21,21 +21,22 @@ export const Card = memo(
       published = '2021',
       imageSmall = 'https://picsum.photos/200/200',
       imageMedium = 'https://picsum.photos/400/400',
-      imageLarge = 'https://picsum.photos/600/600',
     } = book;
 
     return (
       <div onClick={onClick}>
         <figure className="card-container">
           <div className="card-container-img">
-            <img
-              className="img-item"
-              src={imageSmall}
-              srcSet={`${imageSmall} 400, ${imageMedium} 800, ${imageLarge} 1200`}
-              width={width}
-              height={height}
-              alt={title}
-            />
+            <picture>
+              <source className="img-item" srcSet={imageMedium} media="(min-width: 768px)" />
+              <img
+                className="img-item"
+                src={imageSmall}
+                width={width}
+                height={height}
+                alt={title}
+              />
+            </picture>
           </div>
           <figcaption>
             <h2 className="card-title">{title}</h2>
