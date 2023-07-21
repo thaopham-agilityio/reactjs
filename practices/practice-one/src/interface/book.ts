@@ -5,6 +5,7 @@ export interface IBook {
   description: string;
   imageSmall: string;
   imageMedium: string;
+  imageLarge: string;
   author: string;
   published: string;
   publishers: string;
