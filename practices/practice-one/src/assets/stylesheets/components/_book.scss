@@ -194,6 +194,10 @@
     &-arrow {
       margin: 0 15px;
 
+      .img-item {
+        aspect-ratio: 11/4;
+      }
+
       .img-container {
         @extend %inline-block;
       }
