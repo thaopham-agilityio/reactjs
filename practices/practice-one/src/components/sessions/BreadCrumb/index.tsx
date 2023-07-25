@@ -12,7 +12,7 @@ const BreadCrumb = memo(({ selectedCategory, total }: BreadCrumbProps): JSX.Elem
     <div className="book-title">
       <span className="book-title-text">{selectedCategory || 'All Books'}</span>
       <span className="book-title-arrow">
-        <Image altText="arrow" height="8" imageSrc={arrow} width="22" />
+        <Image altText="arrow" imageSrc={arrow} width={22} />
       </span>
       <span className="book-title-results">Showing {total} Result(s)</span>
     </div>

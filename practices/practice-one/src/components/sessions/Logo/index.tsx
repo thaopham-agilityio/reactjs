@@ -15,7 +15,7 @@ const Logo = memo(({ onToggleCategoriesOnMobile }: LogoProps): JSX.Element => {
         <Button className="btn btn-hamburger" onClick={onToggleCategoriesOnMobile} />
       </span>
       <a className="header-logo" href={ROUTES.HOME} title="Book Shelter">
-        <Image altText="Book Shelter" height="44" imageSrc={logo} width="54" text="BookShelter" />
+        <Image altText="Book Shelter" imageSrc={logo} width={54} text="BookShelter" />
       </a>
     </section>
   );
