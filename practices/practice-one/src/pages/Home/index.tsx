@@ -247,7 +247,7 @@ const Home = memo((): JSX.Element => {
             isThemeModal={isThemeModal}
             title={bookSelected.title}
           >
-            <BookDetail width="128" height="170" book={bookSelected} />
+            <BookDetail width={128} book={bookSelected} />
           </Modal>
         </section>
       </main>

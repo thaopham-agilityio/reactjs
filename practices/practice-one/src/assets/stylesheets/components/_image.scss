@@ -6,7 +6,7 @@
   &-container {
     @extend %flex;
     @extend %item-center;
-    min-width: 23px;
+    @extend %justify-center;
 
     .text {
       @extend %none;

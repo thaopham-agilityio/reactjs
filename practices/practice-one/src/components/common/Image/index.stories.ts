@@ -17,7 +17,6 @@ export const Default: Story = {
   args: {
     imageSrc: 'https://picsum.photos/200/200',
     altText: 'image',
-    width: '200',
-    height: '200',
+    width: 200,
   },
 };
