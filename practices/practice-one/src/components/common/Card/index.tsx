@@ -1,4 +1,5 @@
 import { IBook } from '@interface/book';
+import { Image } from '@components/common/Image';
 import { memo } from 'react';
 
 // Define the props for the Card component
@@ -27,7 +28,7 @@ export const Card = memo(({ width, book, onClick }: CardProps): JSX.Element => {
         <div className="card-container-img">
           <picture>
             <source className="img-item" srcSet={imageMedium} media="(min-width: 768px)" />
-            <img className="img-item" src={imageSmall} width={width} alt={title} />
+            <Image imageSrc={imageSmall} width={width} altText={title} />
           </picture>
         </div>
         <figcaption>
